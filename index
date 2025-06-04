@@ -1,257 +1,829 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhamad Rasya - Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --background-color: #f0f3f5;
-            --text-color: #2c3e50;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
         }
 
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .neumorphic {
-            background: var(--background-color);
-            box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
-            border-radius: 15px;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
             transition: all 0.3s ease;
         }
 
-        .btn-primary:hover {
-            background-color: #2980b9;
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #3498db;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: #2980b9;
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #3498db;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
         }
 
         .skill-bar {
-            height: 10px;
-            background-color: #ecf0f1;
-            border-radius: 5px;
+            background: #ecf0f1;
+            height: 8px;
+            border-radius: 4px;
+            margin: 1rem 0;
             overflow: hidden;
         }
 
         .skill-progress {
             height: 100%;
-            background-color: var(--primary-color);
-            border-radius: 5px;
-            width: 0;
-            transition: width 1s ease-in-out;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 4px;
+            transition: width 2s ease;
         }
 
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
+        /* Experience Section */
+        .experience {
+            background: #f8f9fa;
+        }
+
+        .experience-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .experience-duration {
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .experience-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .experience-description ul {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .experience-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .contact-card p {
+            color: #666;
+        }
+
+        .contact-card a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .profile-img {
+                width: 200px;
+                height: 200px;
+                font-size: 3rem;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <div id="particles-js"></div>
-
-    <header class="fixed top-0 left-0 w-full bg-white bg-opacity-90 shadow-md z-50">
-        <nav class="container mx-auto px-6 py-3">
-            <ul class="flex justify-center space-x-8">
-                <li><a href="#home" class="text-lg font-semibold hover:text-primary-color transition-colors">Home</a></li>
-                <li><a href="#about" class="text-lg font-semibold hover:text-primary-color transition-colors">About</a></li>
-                <li><a href="#skills" class="text-lg font-semibold hover:text-primary-color transition-colors">Skills</a></li>
-                <li><a href="#projects" class="text-lg font-semibold hover:text-primary-color transition-colors">Projects</a></li>
-                <li><a href="#contact" class="text-lg font-semibold hover:text-primary-color transition-colors">Contact</a></li>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">Muhamad Rasya</div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#skills">Keahlian</a></li>
+                <li><a href="#experience">Pengalaman</a></li>
+                <li><a href="#contact">Kontak</a></li>
             </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="home" class="parallax h-screen flex items-center justify-center" style="background-image: url('https://picsum.photos/3000/2000?random=1');">
-            <div class="text-center text-white">
-                <h1 class="text-6xl font-bold mb-4">Muhamad Rasya</h1>
-                <p class="text-2xl">Student In Class XII Programmer Computer</p>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <section id="about" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold mb-8 text-center">About Me</h2>
-                <div class="neumorphic p-8">
-                    <p class="text-lg leading-relaxed">
-                        Hello! I'm Muhamad Rasya, a passionate web developer and designer with a keen eye for detail and a love for creating beautiful, functional websites. With years of experience in the field, I specialize in crafting user-friendly interfaces and robust backend systems that bring ideas to life.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Muhamad Rasya</h1>
+            <p class="subtitle">Fresh Graduate | Data Management Specialist</p>
+            <p class="description">Lulusan baru dengan pengalaman magang dalam pengelolaan data dan keahlian Microsoft Office yang solid. Siap berkontribusi dalam tim yang dinamis dan terus belajar untuk mengembangkan karir profesional.</p>
+            <a href="#contact" class="cta-button">Hubungi Saya</a>
+        </div>
+    </section>
 
-        <section id="skills" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold mb-8 text-center">My Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="neumorphic p-6">
-                        <h3 class="text-2xl font-semibold mb-4">HTML/CSS</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90%"></div>
-                        </div>
-                    </div>
-                    <div class="neumorphic p-6">
-                        <h3 class="text-2xl font-semibold mb-4">JavaScript</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="20%"></div>
-                        </div>
-                    </div>
-                    <div class="neumorphic p-6">
-                        <h3 class="text-2xl font-semibold mb-4">React</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="0%"></div>
-                        </div>
-                    </div>
-                    <div class="neumorphic p-6">
-                        <h3 class="text-2xl font-semibold mb-4">Node.js</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="20%"></div>
-                        </div>
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">Tentang Saya</h2>
+            <div class="about-content">
+                <div class="about-image fade-in">
+                    <div class="profile-img">
+                        <i class="fas fa-user"></i>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="projects" class="py-20 parallax" style="background-image: url('https://picsum.photos/3000/2000?random=2');">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold mb-8 text-center text-white">My Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="neumorphic p-6 bg-white bg-opacity-90">
-                        <h3 class="text-2xl font-semibold mb-4">Project 1</h3>
-                        <p>A responsive e-commerce website with a sleek design and smooth user experience.</p>
-                    </div>
-                    <div class="neumorphic p-6 bg-white bg-opacity-90">
-                        <h3 class="text-2xl font-semibold mb-4">Project 2</h3>
-                        <p>A real-time chat application built with React and Firebase for instant messaging.</p>
-                    </div>
-                    <div class="neumorphic p-6 bg-white bg-opacity-90">
-                        <h3 class="text-2xl font-semibold mb-4">Project 3</h3>
-                        <p>A task management system with user authentication and data visualization.</p>
-                    </div>
+                <div class="about-text fade-in">
+                    <h3>Fresh Graduate yang Berdedikasi</h3>
+                    <p>Saya adalah lulusan baru yang memiliki passion dalam bidang pengelolaan data dan administrasi. Dengan pengalaman magang selama 4 bulan di DPMPTSP, saya telah mengembangkan kemampuan dalam mengelola data arsip IMB & IPR menggunakan Microsoft Excel.</p>
+                    <p>Saya memiliki kemampuan yang baik dalam mengoperasikan aplikasi Microsoft Office dan selalu antusias untuk mempelajari teknologi baru. Saya percaya bahwa dengan dedikasi dan kerja keras, saya dapat memberikan kontribusi yang berarti bagi perusahaan.</p>
+                    <p>Saya mencari kesempatan untuk memulai karir profesional di lingkungan yang mendukung pertumbuhan dan pembelajaran berkelanjutan.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold mb-8 text-center">Contact Me</h2>
-                <form class="neumorphic p-8 max-w-2xl mx-auto">
-                    <div class="mb-6">
-                        <label for="name" class="block text-lg font-semibold mb-2">Name</label>
-                        <input type="text" id="name" name="name" class="w-full p-3 rounded-lg" required>
+    <!-- Skills Section -->
+    <section class="section skills" id="skills">
+        <div class="container">
+            <h2 class="section-title fade-in">Keahlian</h2>
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-file-excel"></i>
                     </div>
-                    <div class="mb-6">
-                        <label for="email" class="block text-lg font-semibold mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full p-3 rounded-lg" required>
+                    <h3>Microsoft Excel</h3>
+                    <p>Mahir dalam pengolahan data, formula, pivot table, dan analisis data</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
                     </div>
-                    <div class="mb-6">
-                        <label for="message" class="block text-lg font-semibold mb-2">Message</label>
-                        <textarea id="message" name="message" rows="5" class="w-full p-3 rounded-lg" required></textarea>
+                    <small>85% - Mahir</small>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-file-word"></i>
                     </div>
-                    <button type="submit" class="btn-primary w-full py-3 rounded-lg text-lg font-semibold">Send Message</button>
-                </form>
+                    <h3>Microsoft Word</h3>
+                    <p>Pembuatan dokumen, formatting, dan template profesional</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                    <small>80% - Mahir</small>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <h3>Microsoft PowerPoint</h3>
+                    <p>Presentasi menarik, animasi, dan desain slide profesional</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                    <small>75% - Baik</small>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Pengelolaan Data</h3>
+                    <p>Organisasi data, entry data, dan maintenance database</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                    <small>80% - Mahir</small>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                    <h3>Manajemen Arsip</h3>
+                    <p>Sistem pengarsipan, dokumentasi, dan retrieval data</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                    <small>85% - Mahir</small>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Kerja Tim</h3>
+                    <p>Kolaborasi, komunikasi, dan koordinasi dalam tim</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                    <small>90% - Sangat Baik</small>
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="bg-white py-6">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Muhamad Rasya. All rights reserved.</p>
+    <!-- Experience Section -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <h2 class="section-title fade-in">Pengalaman</h2>
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-title">Intern - Data Management</h3>
+                        <p class="experience-company">DPMPTSP (Dinas Penanaman Modal dan Pelayanan Terpadu Satu Pintu)</p>
+                    </div>
+                    <div class="experience-duration">4 Bulan</div>
+                </div>
+                <div class="experience-description">
+                    <p>Selama magang di DPMPTSP, saya bertanggung jawab dalam pengelolaan data arsip IMB (Izin Mendirikan Bangunan) dan IPR (Izin Pemanfaatan Ruang) menggunakan Microsoft Excel.</p>
+                    <ul>
+                        <li><strong>Pengelolaan Data Arsip:</strong> Mengorganisir dan memelihara database arsip IMB & IPR dalam format Excel dengan sistem yang terstruktur</li>
+                        <li><strong>Entry Data:</strong> Melakukan input data baru dan update informasi existing dengan tingkat akurasi tinggi</li>
+                        <li><strong>Validasi Data:</strong> Memverifikasi kelengkapan dan keakuratan data sebelum diarsipkan</li>
+                        <li><strong>Pembuatan Laporan:</strong> Menyusun laporan berkala mengenai status dan statistik data arsip</li>
+                        <li><strong>Sistem Pengarsipan:</strong> Mengembangkan sistem kategorisasi dan indexing untuk memudahkan pencarian data</li>
+                        <li><strong>Backup Data:</strong> Melakukan backup rutin untuk memastikan keamanan dan integritas data</li>
+                        <li><strong>Koordinasi Tim:</strong> Berkolaborasi dengan staff lain dalam pengelolaan dokumen dan data</li>
+                    </ul>
+                    <p><strong>Pencapaian:</strong> Berhasil mengorganisir lebih dari 1000 dokumen arsip dan meningkatkan efisiensi pencarian data hingga 40% melalui sistem indexing yang lebih baik.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Hubungi Saya</h2>
+            <div class="contact-grid">
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:muhamadrasya@email.com">mhmdrasya64@gmail.com</a></p>
+                </div>
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Telepon</h3>
+                    <p><a href="tel:+6281234567890">+62 888-9661-138</a></p>
+                </div>
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <h3>LinkedIn</h3>
+                    <p><a href="https://linkedin.com/in/muhamadrasya" target="_blank">linkedin.com/in/mhmd-rasya</a></p>
+                </div>
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Lokasi</h3>
+                    <p>Depok, Indonesia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Muhamad Rasya. Semua hak dilindungi.</p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Parallax scrolling effect
-        gsap.registerPlugin(ScrollTrigger);
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
-        gsap.utils.toArray(".parallax").forEach((section, i) => {
-            gsap.to(section, {
-                backgroundPosition: `50% ${-innerHeight / 2}px`,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                }
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
             });
         });
 
-        // Animate skill bars
-        gsap.utils.toArray(".skill-progress").forEach((bar) => {
-            gsap.to(bar, {
-                width: bar.getAttribute("data-width"),
-                duration: 1.5,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: bar,
-                    start: "top 80%"
-                }
-            });
-        });
-
-        // Smooth scroll for navigation
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
-        // Particles.js configuration
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#3498db" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5, random: false },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: "#3498db", opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 6, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
         });
 
-        // Form submission
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
+        // Animate skill bars when they come into view
+        const skillObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe skills section
+        const skillsSection = document.querySelector('.skills');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+
+        // Add typing effect to hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', function() {
+            const heroTitle = document.querySelector('.hero h1');
+            if (heroTitle) {
+                const originalText = heroTitle.textContent;
+                typeWriter(heroTitle, originalText, 150);
+            }
         });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add hover effect to cards
+        document.querySelectorAll('.skill-card, .contact-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click to copy functionality for contact info
+        document.querySelectorAll('.contact-card a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.href.startsWith('mailto:') || this.href.startsWith('tel:')) {
+                    e.preventDefault();
+                    const text = this.textContent;
+                    navigator.clipboard.writeText(text).then(() => {
+                        // Show temporary notification
+                        const notification = document.createElement('div');
+                        notification.textContent = 'Disalin ke clipboard!';
+                        notification.style.cssText = `
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background: #3498db;
+                            color: white;
+                            padding: 10px 20px;
+                            border-radius: 5px;
+                            z-index: 10000;
+                            animation: fadeInOut 2s ease;
+                        `;
+                        document.body.appendChild(notification);
+                        setTimeout(() => {
+                            document.body.removeChild(notification);
+                        }, 2000);
+                    });
+                }
+            });
+        });
+
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translateX(100%); }
+                20% { opacity: 1; transform: translateX(0); }
+                80% { opacity: 1; transform: translateX(0); }
+                100% { opacity: 0; transform: translateX(100%); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
